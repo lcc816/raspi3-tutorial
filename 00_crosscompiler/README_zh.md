@@ -1,9 +1,9 @@
 AArch64 交叉编译
 ===============
 
-在开始这篇教程之前, 你需要准备一些工具, 即编译器，用于编译AArch64体系结构及其配套实用程序.
+在开始这套教程之前, 你需要准备一些工具, 即编译器，用于编译AArch64体系结构及其配套实用程序.
 
-**重要提示**: 这篇说明并不讲述如何编译一个通用的交叉编译器, 而只是介绍如何编译用于 *AArch64* 目标器件的交叉编译器. 如有疑问, 请谷歌搜索 "how to build a gcc cross-compiler" 或者访问你的操作系统相应的支持论坛. 我不能也不会对你的操作系统环境给出帮助, 你需要自己解决这些问题. 正如我在介绍中所说, 我假设你知道如何编译程序 (包括交叉编译器的编译).
+**重要提示**: 这篇说明并不介绍如何编译一个通用的交叉编译器, 而只是介绍如何编译用于 *AArch64* 目标器件的交叉编译器. 如有疑问, 请谷歌搜索 "how to build a gcc cross-compiler" 或者访问你的操作系统相应的支持论坛. 我不能也不会对你的操作系统环境给出帮助, 你需要自己解决这些问题. 正如我在介绍中所说, 我假设你知道如何编译程序 (包括交叉编译器的编译).
 
 **提示**: 如果不喜欢 gcc, 感谢 @laroche, 此教程也经过 Clang 测试.
 
@@ -97,6 +97,7 @@ make install
 第二个需要编译的程序包自然就是 *gcc complier* 本身了.
 
 ```sh
+cd gcc-*
 ./configure --prefix=/usr/local/cross-compiler --target=aarch64-elf --enable-languages=c \
 --enable-shared --enable-threads=posix --enable-libmpx --with-system-zlib --with-isl --enable-__cxa_atexit \
 --disable-libunwind-exceptions --enable-clocale=gnu --disable-libstdcxx-pch --disable-libssp --enable-plugin \
