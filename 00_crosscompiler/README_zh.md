@@ -80,9 +80,18 @@ cd ..
 
 现在我们需要编译两个程序包. 第一个称为 *binutils*, 其中包括连接器, 汇编器和其他有用的命令.
 
+创建交叉编译工具的安装目录:
 ```sh
-cd binutils-*
-./configure --prefix=/usr/local/cross-compiler --target=aarch64-elf \
+sudo mkdir /opt/cross-compiler/aarch64
+sudo chown -R $USER /opt/cross-compiler
+```
+
+外部编译 *binutils* 源码:
+
+```sh
+mkdir build-binutils
+cd build-binutils
+../binutils-*/configure --prefix=/opt/cross-compiler/aarch64 --target=aarch64-elf \
 --enable-shared --enable-threads=posix --enable-libmpx --with-system-zlib --with-isl --enable-__cxa_atexit \
 --disable-libunwind-exceptions --enable-clocale=gnu --disable-libstdcxx-pch --disable-libssp --enable-plugin \
 --disable-linker-build-id --enable-lto --enable-install-libiberty --with-linker-hash-style=gnu --with-gnu-ld\
@@ -97,8 +106,9 @@ make install
 第二个需要编译的程序包自然就是 *gcc complier* 本身了.
 
 ```sh
-cd gcc-*
-./configure --prefix=/usr/local/cross-compiler --target=aarch64-elf --enable-languages=c \
+mkdir build-gcc
+cd build-gcc
+../gcc-*/configure --prefix=/opt/cross-compiler/aarch64 --target=aarch64-elf \ --enable-languages=c \
 --enable-shared --enable-threads=posix --enable-libmpx --with-system-zlib --with-isl --enable-__cxa_atexit \
 --disable-libunwind-exceptions --enable-clocale=gnu --disable-libstdcxx-pch --disable-libssp --enable-plugin \
 --disable-linker-build-id --enable-lto --enable-install-libiberty --with-linker-hash-style=gnu --with-gnu-ld\
