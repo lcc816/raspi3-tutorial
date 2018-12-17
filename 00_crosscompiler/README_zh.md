@@ -5,7 +5,7 @@ AArch64 交叉编译
 
 **重要提示**: 这篇说明并不介绍如何编译一个通用的交叉编译器, 而只是介绍如何编译用于 *AArch64* 目标器件的交叉编译器. 如有疑问, 请谷歌搜索 "how to build a gcc cross-compiler" 或者访问你的操作系统相应的支持论坛. 我不能也不会对你的操作系统环境给出帮助, 你需要自己解决这些问题. 正如我在介绍中所说, 我假设你知道如何编译程序 (包括交叉编译器的编译).
 
-**提示**: 如果不喜欢 gcc, 感谢 @laroche, 此教程也经过 Clang 测试.
+**提示**: 如果不喜欢 gcc, 本教程的例子也可用 Clang 测试, 为此感谢 @laroche.
 
 编译系统
 -------
@@ -101,7 +101,7 @@ make -j4
 make install
 ```
 
-其中, 第一个参数告诉 configure 脚本将构建结果安装到 `/usr/local/cross-complier`. 第二个参数指定我们要为其编译工具的目标架构. 其他参数打开或关闭特定的选项, 不必改动, 只要知道它们适合嵌入式系统的编译就行了.
+其中, 第一个参数告诉 configure 脚本将构建结果安装到 `/opt/cross-compiler/aarch64`. 第二个参数指定我们要为其编译工具的目标架构. 其他参数打开或关闭特定的选项, 不必改动, 只要知道它们适合嵌入式系统的编译就行了.
 
 第二个需要编译的程序包自然就是 *gcc complier* 本身了.
 
@@ -120,10 +120,10 @@ make install-gcc
 
 这里我们指定同先前一样的安装目录和架构. 我们还指定只编译 C 编译器, 以免 gcc 会支持大量我们不需要的语言, 这样可以极大地减少编译时间. 余下参数同编译 binutils 一样.
 
-现在查看 `/usr/local/cross-complier` 目录下的 `bin` 文件夹, 应当存在大量可执行文件. 你或许希望将此目录添加到 PATH 环境变量.
+现在查看 `/opt/cross-compiler/aarch64` 目录下的 `bin` 文件夹, 应当存在大量可执行文件. 为了方便你可以将此目录添加到 PATH 环境变量.
 
 ```sh
-ls /usr/local/cross-compiler/bin
+ls /opt/cross-compiler/aarch64/bin
 aarch64-elf-addr2line  aarch64-elf-elfedit    aarch64-elf-gcc-ranlib  aarch64-elf-ld       aarch64-elf-ranlib
 aarch64-elf-ar         aarch64-elf-gcc        aarch64-elf-gcov        aarch64-elf-ld.bfd   aarch64-elf-readelf
 aarch64-elf-as         aarch64-elf-gcc-7.2.0  aarch64-elf-gcov-dump   aarch64-elf-nm       aarch64-elf-size
